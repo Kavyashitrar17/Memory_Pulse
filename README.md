@@ -1,24 +1,74 @@
-# 🎮 Simon Game
+# 🧠 MemoryPulse – Interactive Pattern Memory Game
 
-A simple memory-based game built with **HTML, CSS, and JavaScript**.  
-The goal is to repeat the sequence of flashing colors. Each correct sequence takes you to the next level, making it harder. The game also keeps track of your **highest score**.
+MemoryPulse is a browser-based memory training game developed using **HTML, CSS, and JavaScript**.
+The game challenges players to repeat an increasing sequence of colors and sounds, testing reaction time, focus, and short-term memory.
 
-## ✨ Features
-- Classic Simon memory gameplay
-- Increases difficulty as you progress
-- Tracks and displays your high score
-- Clean, responsive UI
-
-## 🚀 How to Play
-1. Press any key to start the game.
-2. Watch the sequence of flashing colors.
-3. Repeat the sequence by clicking the correct buttons.
-4. If you make a mistake, the game ends and shows your score.
-5. Try again and beat your high score!
-
-## 🛠️ Built With
-- HTML
-- CSS
-- JavaScript (Vanilla)
+Unlike a basic Simon clone, MemoryPulse includes sound feedback, difficulty levels, animations, and persistent high-score storage.
 
 ---
+
+## 🎮 Gameplay
+
+1. Start the game and watch the flashing color pattern.
+2. Repeat the pattern by clicking the buttons in the same order.
+3. Each level adds one more step to the sequence.
+4. A mistake ends the game and displays your score.
+
+---
+
+## ✨ Features
+
+* 🔊 Sound effects for each button
+* 🌈 Animated visual feedback
+* 📈 Level progression system
+* 🧠 Pattern memory logic
+* 🏆 Persistent high score (LocalStorage)
+* 🎚 Difficulty modes (Easy / Medium / Hard)
+* 🔁 Restart option after game over
+* 📱 Responsive UI design
+
+---
+
+## 🛠 Technologies Used
+
+* HTML5
+* CSS3 (Flexbox, Animations, Responsive Design)
+* JavaScript (DOM Manipulation, Event Handling, LocalStorage API)
+
+---
+
+## 🧩 Concepts Implemented
+
+* Event-driven programming
+* Sequence validation algorithm
+* Game state management
+* Timers and asynchronous behavior (`setTimeout`)
+* Browser Local Storage
+* UI state transitions (Start → Playing → Game Over)
+
+---
+
+## 📂 Project Structure
+
+```
+MemoryPulse/
+│── mini.html
+│── mini.css
+│── mini.js
+│── README.md
+```
+
+---
+
+## 🚀 Future Improvements
+
+* Dark mode toggle
+* Mobile vibration feedback
+* Leaderboard system
+* Progressive speed increase
+
+---
+
+## 👩‍💻 Author
+
+Kavyashi Trar
