@@ -1,33 +1,159 @@
-body{
-    text-align: center;
-}
-.btn{
-    height: 200px;
-    width: 200px;
-    border-radius: 20%;
-    border: 10px solid black;
-    margin:2rem;
-}
-.btn-container{
-    display: flex;
-    justify-content: center;
-}
-.orange{
-    background-color: #f99b45;
-}
-.blue{
-    background-color: #819ff9;
-}
-.red{
-    background-color:#d95980;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
 }
 
-.green{
-    background-color: #63aac0;
+body{
+    background: linear-gradient(135deg,#141e30,#243b55);
+    color:white;
+    text-align:center;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
+
+.header{
+    margin-bottom:20px;
+}
+
+#levelTitle{
+    font-size:32px;
+    font-weight:600;
+}
+
+#scoreText, #highScore{
+    font-size:16px;
+    opacity:0.9;
+}
+
+
+.btn-container{
+    display:grid;
+    grid-template-columns: repeat(2, 170px);
+    grid-template-rows: repeat(2, 170px);
+    gap:25px;
+    margin-top:20px;
+}
+
+
+.game-btn{
+    width:170px;
+    height:170px;
+    border-radius:25px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+
+.orange{ background:#f99b45; }
+.blue{ background:#819ff9; }
+.red{ background:#d95980; }
+.green{ background:#63aac0; }
+
 .flash{
-    background-color: white;
+    filter: brightness(180%);
+    transform: scale(1.08);
+    box-shadow:0 0 25px white;
 }
+
+
 .userFlash{
-     background-color: green;
+    transform: scale(0.95);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+
+
+.start-card{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:20px;
+    width:280px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+.start-card h1{
+    margin-bottom:10px;
+}
+
+.start-card select{
+    width:100%;
+    padding:8px;
+    margin:12px 0;
+    border-radius:8px;
+}
+
+.start-card button{
+    padding:10px 16px;
+    border:none;
+    border-radius:10px;
+    background:#243b55;
+    color:white;
+    cursor:pointer;
+}
+
+
+.game-over{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:20;
+}
+
+.game-over h2{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.game-over button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#f05454;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none;
+}
+
+
+body.game-fail{
+    background:#8b0000;
+}
+
+
+@media(max-width:480px){
+    .btn-container{
+        grid-template-columns: repeat(2, 130px);
+        grid-template-rows: repeat(2, 130px);
+        gap:18px;
+    }
+    .game-btn{
+        width:130px;
+        height:130px;
+    }
 }

@@ -1,86 +1,153 @@
-let gameSeq=[];
-let userseq=[];
-let btns=["orange","blue","red","green"];
-let started=false;
-let level =0;
-let highest=[];
-let h3=document.querySelector("h3");
-let h2=document.querySelector("h2");
-document.addEventListener("keypress",function(){
-    if(started == false){
-        console.log("game started");
-        started=true;
-        levelUp();
-    }
-});
-function gameFlash(btn){
-    btn.classList.add("flash");
-    setTimeout(function(){
-       btn.classList.remove("flash") ;
-    },250);
+const btnColors = ["orange","blue","red","green"];
+
+let gameSeq = [];
+let userSeq = [];
+let level = 0;
+let started = false;
+let speed = 900;
+
+
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
+const difficulty = document.getElementById("difficulty");
+
+const levelTitle = document.getElementById("levelTitle");
+const scoreText = document.getElementById("scoreText");
+const highScoreText = document.getElementById("highScore");
+
+const gameOverScreen = document.getElementById("gameOver");
+const finalScore = document.getElementById("finalScore");
+const restartBtn = document.getElementById("restartBtn");
+
+
+let highScore = localStorage.getItem("memoryPulseHigh") || 0;
+highScoreText.innerText = `High Score: ${highScore}`;
+
+
+const sounds = {
+    orange: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
+    blue: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
+    red: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
+    green: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"),
+    wrong: new Audio("https://www.myinstants.com/media/sounds/wrong-answer.mp3")
 };
+
+
+
+startBtn.addEventListener("click", () => {
+    startScreen.style.display = "none";
+    speed = parseInt(difficulty.value);
+    started = true;
+    levelUp();
+});
+
+
+
+function flash(btn){
+    btn.classList.add("flash");
+    sounds[btn.id].play();
+
+    setTimeout(()=>{
+        btn.classList.remove("flash");
+    },250);
+}
+
 function userFlash(btn){
     btn.classList.add("userFlash");
-    setTimeout(function(){
-       btn.classList.remove("userFlash") ;
-    },250);
-};
+    sounds[btn.id].play();
+
+    setTimeout(()=>{
+        btn.classList.remove("userFlash");
+    },200);
+}
+
+
 
 function levelUp(){
-    userseq=[];
-  level++;
-  h2.innerText=`Level ${level}`;
-  //random button flash
-  let randIdx=Math.floor(Math.random()*4);
-  let randColor=btns[randIdx];
-  let randBtn=document.querySelector(`.${randColor}`);
-//   console.log(randIdx);
-//   console.log(randColor);
-//   console.log(randBtn);
-gameSeq.push(randColor);
-console.log(gameSeq);
-  gameFlash(randBtn);
-};
-function checkAns(idx){
-    if(userseq[idx]== gameSeq[idx]){
-        if(userseq.length==gameSeq.length){
-           setTimeout(levelUp(),1500);
+    userSeq = [];
+    level++;
+
+    levelTitle.innerText = `Level ${level}`;
+    scoreText.innerText = `Score: ${level-1}`;
+
+    const randColor = btnColors[Math.floor(Math.random()*4)];
+    gameSeq.push(randColor);
+
+    const btn = document.getElementById(randColor);
+
+    setTimeout(()=>{
+        flash(btn);
+    },speed);
+}
+
+
+
+document.querySelectorAll(".game-btn").forEach(btn=>{
+    btn.addEventListener("click",function(){
+
+        if(!started) return;
+
+        userFlash(this);
+        const color = this.id;
+        userSeq.push(color);
+
+        checkAnswer(userSeq.length-1);
+    });
+});
+
+
+
+function checkAnswer(index){
+
+    if(userSeq[index] === gameSeq[index]){
+
+        if(userSeq.length === gameSeq.length){
+            setTimeout(levelUp, 1000);
         }
 
+    }else{
+        gameOver();
     }
-    else{
-        h2.innerHTML=`Game over! Your score was <b>${level}</b> <br>press any key to start`;
-        let high=`${level}`;
-        highest.push(high);
-        h3.innerText=`Highest score is ${Math.max(...highest)}`;
-        document.querySelector("body").style.backgroundColor="red";
-        setTimeout(function(){
-         document.querySelector("body").style.backgroundColor="white"
-    },200);
-        reset();
 }
-}
+
+
+
+function gameOver(){
+
+    sounds.wrong.play();
+    document.body.classList.add("game-fail");
+
+    setTimeout(()=>{
+        document.body.classList.remove("game-fail");
+    },300);
+
+    finalScore.innerText = `Your Score: ${level-1}`;
+    gameOverScreen.classList.remove("hidden");
+
     
+    if(level-1 > highScore){
+        highScore = level-1;
+        localStorage.setItem("memoryPulseHigh", highScore);
+    }
 
+    highScoreText.innerText = `High Score: ${highScore}`;
 
-function btnPress(){
-    let btn=this;
-    userFlash(btn);
-
-
-    userColor=btn.getAttribute("id");
-    userseq.push(userColor);
-    checkAns(userseq.length-1);
-
+    resetGame();
 }
-let allbtns=document.querySelectorAll(".btn");
-for(btn of allbtns){
-    btn.addEventListener("click",btnPress);
-}
-function reset(){
-    started=false;
-    gameSeq=[];
-    userseq=[];
-    level=0;
+
+
+
+restartBtn.addEventListener("click", ()=>{
+    gameOverScreen.classList.add("hidden");
+    levelUp();
+});
+
+
+
+function resetGame(){
+    started = true;
+    gameSeq = [];
+    userSeq = [];
+    level = 0;
 }
 

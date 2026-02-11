@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMON GAME</title>
-    <link rel="stylesheet" href="mini.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MemoryPulse | Pattern Memory Game</title>
+
+<link rel="stylesheet" href="mini.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>  
-    <h1>Simon Game</h1>
-    <h2>Press any key to start</h2>
 
-    <div class="btn-container">
-        <div class="line-one">
-        <div class="btn orange" type="button" id="orange"></div>
-         <div class="btn blue" type="button" id ="blue"></div>
-         </div>
-         <div class="line-two">
-          <div class="btn red" type="button" id ="red"></div>
-           <div class="btn green" type="button" id ="green"></div>
-        </div>
+<body>
+
+
+<div id="startScreen" class="overlay">
+    <div class="start-card">
+        <h1>🧠 MemoryPulse</h1>
+        <p>Train your memory reflexes</p>
+
+        <label>Difficulty</label>
+        <select id="difficulty">
+            <option value="900">Easy</option>
+            <option value="600">Medium</option>
+            <option value="350">Hard</option>
+        </select>
+
+        <button id="startBtn">Start Game</button>
     </div>
-    <h3></h3>
-    <script src="mini.js"></script>
+</div>
+
+
+<div class="header">
+    <h2 id="levelTitle">Level 0</h2>
+    <p id="scoreText">Score: 0</p>
+    <p id="highScore">High Score: 0</p>
+</div>
+
+
+<div class="btn-container">
+
+    <div class="game-btn orange" id="orange"></div>
+    <div class="game-btn blue" id="blue"></div>
+    <div class="game-btn red" id="red"></div>
+    <div class="game-btn green" id="green"></div>
+
+</div>
+
+
+<div id="gameOver" class="game-over hidden">
+    <h2>Game Over!</h2>
+    <p id="finalScore"></p>
+    <button id="restartBtn">Play Again</button>
+</div>
+
+<script src="mini.js"></script>
 </body>
 </html>
